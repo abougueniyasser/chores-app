@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 
-export default function Home() {
+export default function Done() {
   return (
     <View style={styles.container}>
-      <Text>Hello There</Text>
+      <Text>No TO-DOs done yet. Consider completing some today :D !</Text>
     </View>
   );
 }
