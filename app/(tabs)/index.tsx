@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { StyleSheet, Text, View, SafeAreaView, Pressable } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 
 import TodoList, { TodoType } from "../../components/TodoList";
 import Button from "../../components/UI/Button";
+import { useRouter } from "expo-router";
 
 const TODOS: TodoType[] = [
   {
@@ -24,6 +25,7 @@ const TODOS: TodoType[] = [
 
 export default function Todos() {
   const [todosList, setTodosList] = useState(TODOS);
+  const router = useRouter();
 
   if (todosList.length == 0) {
     return (
@@ -34,13 +36,15 @@ export default function Todos() {
   }
 
   function handleAddTodo() {
-    return;
+    router.push({ pathname: "modal", params: { action: "add" } });
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <TodoList todos={todosList} />
-      <Button onPress={handleAddTodo}>Add Todo</Button>
+      <Button onPress={handleAddTodo} style={styles.button} primary>
+        Add Todo
+      </Button>
     </SafeAreaView>
   );
 }
@@ -49,10 +53,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "stretch",
+    justifyContent: "space-between",
   },
   emptyListContainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  button: {
+    marginBottom: 80,
   },
 });
