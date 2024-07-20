@@ -16,6 +16,8 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 1,
     shadowRadius: 0,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
   },
   heading: {
     textTransform: "capitalize",

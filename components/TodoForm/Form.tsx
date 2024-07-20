@@ -35,8 +35,9 @@ export default function Form({ onCloseModal }: FormProps) {
 const styles = StyleSheet.create({
   form: {
     flex: 1,
-    marginVertical: 40,
-    marginHorizontal: 20,
+    paddingVertical: 40,
+    paddingHorizontal: 20,
+    backgroundColor: "white",
   },
   button: {
     marginVertical: 20,

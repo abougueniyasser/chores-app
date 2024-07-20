@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { useRouter, useFocusEffect } from "expo-router";
 
 import TodoList, { TodoType } from "../../components/TodoList";
 import Button from "../../components/UI/Button";
-import { useRouter } from "expo-router";
 
 const TODOS: TodoType[] = [
   {
-    title: "Make breakfast.",
+    title: "defhkj.",
     id: Math.random(),
     date: new Date(),
   },
@@ -25,7 +25,14 @@ const TODOS: TodoType[] = [
 
 export default function Todos() {
   const [todosList, setTodosList] = useState(TODOS);
+  const [buttonClicked, setButtonClicked] = useState(false);
   const router = useRouter();
+
+  useFocusEffect(
+    useCallback(() => {
+      setButtonClicked(false);
+    }, [])
+  );
 
   if (todosList.length == 0) {
     return (
@@ -36,11 +43,12 @@ export default function Todos() {
   }
 
   function handleAddTodo() {
+    setButtonClicked(true);
     router.push({ pathname: "modal", params: { action: "add" } });
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, buttonClicked && { opacity: 0.4 }]}>
       <TodoList todos={todosList} />
       <Button onPress={handleAddTodo} style={styles.button} primary>
         Add Todo
