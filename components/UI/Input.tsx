@@ -1,9 +1,18 @@
 import { StyleSheet, TextInput, View } from "react-native";
 
-export default function Input() {
+type InputProps = {
+  value: string;
+  onChange: (text: string) => void;
+};
+export default function Input({ value, onChange }: InputProps) {
   return (
     <View style={styles.inputContainer}>
-      <TextInput placeholder="What do you want to do?" style={styles.input} />
+      <TextInput
+        value={value}
+        onChangeText={onChange}
+        placeholder="What do you want to do?"
+        style={styles.input}
+      />
     </View>
   );
 }

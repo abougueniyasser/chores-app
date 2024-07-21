@@ -1,19 +1,38 @@
 import { StyleSheet, Text, View } from "react-native";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
+import { useContext, useState } from "react";
+import { TodosContext } from "@/store/todos-context";
 
 type FormProps = {
   onCloseModal: () => void;
 };
 
 export default function Form({ onCloseModal }: FormProps) {
+  const [todo, setTodo] = useState("");
+  const todosContext = useContext(TodosContext);
+
+  function handleTodoChange(text: string) {
+    setTodo(text);
+  }
+
+  function handleAddTodo() {
+    todosContext.addTodo({
+      title: todo,
+      id: Math.random(),
+      date: new Date(),
+    });
+
+    onCloseModal();
+  }
+
   return (
     <View style={styles.form}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Title</Text>
       </View>
 
-      <Input />
+      <Input value={todo} onChange={handleTodoChange} />
 
       {/* Buttons */}
       <View style={styles.buttonsContainer}>
@@ -23,7 +42,7 @@ export default function Form({ onCloseModal }: FormProps) {
           </Button>
         </View>
         <View style={styles.buttonContainer}>
-          <Button onPress={onCloseModal} style={styles.button} primary>
+          <Button onPress={handleAddTodo} style={styles.button} primary>
             Submit
           </Button>
         </View>
